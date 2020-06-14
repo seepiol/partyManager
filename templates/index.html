@@ -1,0 +1,21 @@
+{% block body %}
+    <h1>Home</h1>
+    <br>
+    <form action='/makeorder' method='post'>
+        <div class="form-group">
+            <label for="itemInput">Item</label>
+            <select class="form-control" id="itemInput" name='item'>
+                <option disabled selected>Your Item</option>
+                {% for item in item_list %}
+                <option value='{{item}}'>{{item}}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="nameInput">Your code</label>
+            <input type="text" id="codeInput" name="code">
+        </div>
+            <br>
+        <input class="btn btn-outline-secondary" type='submit' value='Make Order'>      
+    </form>
+{% endblock %}
