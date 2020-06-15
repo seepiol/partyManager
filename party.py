@@ -1,8 +1,11 @@
 # Libs
 from flask import Flask, render_template, request, redirect
 import os
-import csv
+import sqlite3
+import dboperations
+
 app=Flask(__name__)
+
 
 item_list = ["Birra","Coca-Cola","Pepsi"]
 people_dict = {"a0a0":"Bob","ct01":"Alice"}
@@ -18,7 +21,6 @@ def makeorder():
     # Getting the values
     code = request.form.get("code")
     item = request.form.get("item")
-    print(code, item)
     if not item or not code:
         print("Not all form completed")
         return 'Please complete all input forms. <a href="/">Go Back</a>'
@@ -54,5 +56,21 @@ def e500(e):
 
 # MAIN
 if __name__ == '__main__':
+    dboperations.make_tables()
+    
+    """
+    decision = input("Do you want to populate the people list? <y/N>: ")
+    if decision in ["y", "Y", "yes"]:
+        dboperations.populate_people()
+    else:
+        pass
+
+    decision = input("Do you want to populate items list? <y/N>: ")
+    if decision in ["y", "Y", "yes"]:
+        dboperations.populate_items()
+    else:
+        pass
+    """
+    
     app.debug = True
-    app.run(host = '0.0.0.0', port=5000)
+    app.run(host = '0.0.0.0', port=8080)
