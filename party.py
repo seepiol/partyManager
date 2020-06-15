@@ -33,6 +33,12 @@ def index():
     arg_code = request.args.get("code")
     return render_template("index.html", items = dboperations.display_items(), code=arg_code)
 
+# Main Route
+@app.route("/bruh")
+def bruh():
+    arg_code = request.args.get("code")
+    return render_template("mindex.html", items = dboperations.display_items(), code=arg_code)
+
 # Making Order
 @app.route("/makeorder", methods=["POST"])
 def makeorder():
