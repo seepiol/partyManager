@@ -30,7 +30,8 @@ app=Flask(__name__)
 # Main Route
 @app.route("/")
 def index():
-    return render_template("index.html", items = dboperations.display_items())
+    arg_code = request.args.get("code")
+    return render_template("index.html", items = dboperations.display_items(), code=arg_code)
 
 # Making Order
 @app.route("/makeorder", methods=["POST"])
@@ -38,20 +39,28 @@ def makeorder():
     # Getting the values
     code = request.form.get("code")
     item = request.form.get("item")
-    if not item or not code:
-        print("Not all form completed")
-        return 'Please complete all input forms. <a href="/">Go Back</a>'
+    arg_code = request.args.get("code")
 
+    if not code and arg_code != "":
+        code = arg_code
+
+    if not item:
+        return render_template("goback.html", message="Please select an item", code=code)
+
+    if not code and not arg_code:
+        return render_template("goback.html", message="Please insert your code")
+    
+    
     person = dboperations.find_person(code)
     if person == False:
-        return 'Unvalid Code. <a href="/">Go Back</a>'
+        return render_template("goback.html", message="Unvalid code")
     dboperations.save_order(item, person)
     print(f"{person}->{item}")
 
-    return render_template('success.html')
+    return render_template('success.html', name=person, code=code)
 
 # MAIN
 if __name__ == '__main__':
     dboperations.make_tables()
     app.debug = True
-    app.run(host = '0.0.0.0', port=8080)
+    app.run(host = '0.0.0.0', port=8081)

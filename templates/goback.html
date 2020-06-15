@@ -1,9 +1,10 @@
 {% extends "layout.html" %}
 {% block body %}
-<h1></h1>
+{{message}}
+<br>
 {% if code %}
-<a href="/?code={{code}}">home</a>
+<a href="/?code={{code}}">Go back</a>
 {% else %}
-<a href="/">home</a>
+<a href="/">Go back</a>
 {% endif %}
 {% endblock %}
