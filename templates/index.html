@@ -6,8 +6,12 @@
             <label for="itemInput">Item</label>
             <select class="form-control" id="itemInput" name='item'>
                 <option disabled selected>Your Item</option>
-                {% for item in item_list %}
-                <option value='{{item}}'>{{item}}</option>
+                {% for item in items %}
+                {% if item[1] == 0 %}
+                <option value='{{item[0]}}'>{{item[0]}}</option>
+                {% else %}
+                <option disabled value='{{item[0]}}'>{{item[0]}}</option>
+                {% endif %}
                 {% endfor %}
             </select>
         </div>

@@ -24,7 +24,7 @@ import string
 
 dbname = "party.db"
 
-conn = sqlite3.connect(dbname)
+conn = sqlite3.connect(dbname, check_same_thread=False)
 c = conn.cursor()
 
 codes = []
@@ -37,9 +37,13 @@ def make_tables():
         
         c.execute("""CREATE TABLE items
                     (id integer primary key autoincrement, name text, outOfStock integer)""")
-        
+        '''
+        c.execute("""CREATE TABLE orders
+                    (id integer primary key autoincrement, item text, person text""")
         conn.commit()
+        '''
         print("DB initialized")
+
     except sqlite3.OperationalError:
         print(f"The database \"{dbname}\" already exists.")
 
@@ -62,5 +66,23 @@ def populate_people():
     conn.commit()
 
 def populate_items():
-    #TODO
-    pass
+    item_name = input("Insert the item name (RETURN to end): ")
+    while item_name != "":
+        c.execute("INSERT INTO items VALUES (NULL,?,0)", (item_name,))
+        item_name = input("Insert the item name (RETURN to end): ")
+    conn.commit()
+
+def find_person(code):
+    c.execute("SELECT name, surname FROM people WHERE code=?", (code,))
+    result = c.fetchall()
+    return " ".join(result[0])
+
+def display_items():
+    c.execute("SELECT name, outOfStock FROM items")
+    result = c.fetchall()
+    return result
+"""
+def save_order(item, person):
+    c.execute("INSERT INTO orders VALUES (NULL, ?, ?)", (item, person))
+    conn.commit()
+"""
