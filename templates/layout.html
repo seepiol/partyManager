@@ -1,12 +1,25 @@
 <html>
     <head>
+        {% block head %}
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
-
-        <link href="/static/css/style.css" rel="stylesheet">
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=">
+        <title>{% block title %}{% endblock %} - PartyName</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+        {% endblock %}
     </head>
     <body>
-        {% block body %}
-        {% endblock %}
+        <header>
+            <div class="headerBox" style="background-image: url('static/img/header.jpg');">
+                <h1 class="siteTitle">PartyName</h1>
+                <h2 class="siteTitle">{% block header %}{% endblock %}</h2>
+            </div>
+        </header>
+            {% block body %}
+            {% endblock %}
+        <footer>
+            <p><a href="/">Home</a> - <a href="https://github.com/seepiol/partymanager">Source Code</a> - <a href="/policy">Privacy Policy</a> - <a href="https://github.com/seepiol/partymanager/blob/master/LICENSE">License</a></p>
+            {% block footer %}
+            {% endblock %}
+        </footer>
     </body>
 </html>

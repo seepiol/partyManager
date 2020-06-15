@@ -19,7 +19,7 @@
 """
 
 # Libs
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, url_for
 import os
 import sqlite3
 import dboperations
@@ -33,11 +33,9 @@ def index():
     arg_code = request.args.get("code")
     return render_template("index.html", items = dboperations.display_items(), code=arg_code)
 
-# Main Route
-@app.route("/bruh")
-def bruh():
-    arg_code = request.args.get("code")
-    return render_template("mindex.html", items = dboperations.display_items(), code=arg_code)
+@app.route("/policy")
+def policy():
+    return render_template("policy.html")
 
 # Making Order
 @app.route("/makeorder", methods=["POST"])
