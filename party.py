@@ -43,9 +43,9 @@ def makeorder():
         return 'Please complete all input forms. <a href="/">Go Back</a>'
 
     person = dboperations.find_person(code)
-    if not person:
+    if person == False:
         return 'Unvalid Code. <a href="/">Go Back</a>'
-    #dboperations.save_order(item, person)
+    dboperations.save_order(item, person)
     print(f"{person}->{item}")
 
     return render_template('success.html')

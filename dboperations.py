@@ -37,11 +37,11 @@ def make_tables():
         
         c.execute("""CREATE TABLE items
                     (id integer primary key autoincrement, name text, outOfStock integer)""")
-        '''
+
         c.execute("""CREATE TABLE orders
-                    (id integer primary key autoincrement, item text, person text""")
+                    (id integer primary key autoincrement, item text, person text)""")
         conn.commit()
-        '''
+
         print("DB initialized")
 
     except sqlite3.OperationalError:
@@ -75,14 +75,15 @@ def populate_items():
 def find_person(code):
     c.execute("SELECT name, surname FROM people WHERE code=?", (code,))
     result = c.fetchall()
+    if len(result) == 0:
+        return False
     return " ".join(result[0])
 
 def display_items():
     c.execute("SELECT name, outOfStock FROM items")
     result = c.fetchall()
     return result
-"""
+
 def save_order(item, person):
     c.execute("INSERT INTO orders VALUES (NULL, ?, ?)", (item, person))
     conn.commit()
-"""
