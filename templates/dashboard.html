@@ -1,0 +1,36 @@
+{% block body %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    </head>
+    <body>
+        <div id=megaContainer>
+            <div id=container1>
+                <div class="totalOrders">
+                    <h1 class="big">{{total_orders}}</h1>
+                    <h3>Total Orders</h3>
+                </div>
+            </div>
+            <div id=container2>
+                <div class="favouriteItem">
+                    <h1 class="big">{{favourite_item}}</h1>
+                    <h3>Favourite Item</h3>
+                </div>
+            </div>
+            <div id=container3>
+                <div class="activeUsers">
+                    <h1 class="big">{{active_users}}</h1>
+                    <h3>Active Users</h3>
+                </div>
+            </div>
+            <div id=container4>
+                <div class="availableItems">
+                    <h1 class="big">{{available_items}}</h1>
+                    <h3>Available Items</h3>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+{% endblock %}

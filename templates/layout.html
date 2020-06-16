@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
     <head>
         {% block head %}
@@ -19,9 +20,9 @@
         <footer>
             <div class=footer>
             {% if code %}
-            <p><a href="/?code={{code}}">Home</a> - <a target="_blank" href="https://github.com/seepiol/partymanager">Source Code</a> - <a href="/policy?code={{code}}">Privacy Policy</a> - <a href="/license?code={{code}}">License</a></p>
+            <p class="footer" style="padding-top: 10px;padding-bottom: 10px;margin-bottom: 0px;"><a href="/?code={{code}}">Home</a> - <a target="_blank" href="https://github.com/seepiol/partymanager">Source Code</a> - <a href="/policy?code={{code}}">Privacy Policy</a> - <a href="/license?code={{code}}">License</a></p>
             {% else %}
-            <p><a href="/">Home</a> - <a target="_blank" href="https://github.com/seepiol/partymanager">Source Code</a> - <a href="/policy">Privacy Policy</a> - <a href="/license">License</a></p>
+            <p class="footer" style="padding-top: 10px;padding-bottom: 10px;margin-bottom: 0px;"><a href="/">Home</a> - <a target="_blank" href="https://github.com/seepiol/partymanager">Source Code</a> - <a href="/policy">Privacy Policy</a> - <a href="/license">License</a></p>
             {% endif %}
             {% block footer %}
             {% endblock %}

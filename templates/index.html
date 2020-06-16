@@ -10,14 +10,14 @@
         <center></center>
             <label for="nameInput"><p>Your code</p></label>
             {% if code %}
-            <input class="equalForm" type="text" id="codeInput" name="code" value={{code}}>
+            <input required class="equalForm" type="text" id="codeInput" name="code" value={{code}}>
             {% else %}    
-            <input class="equalForm" type="text" id="codeInput" name="code">
+            <input required class="equalForm" type="text" id="codeInput" name="code">
             {% endif %}
             <label for="itemInput"><p>Item</p></label>
         </center>
             <center>
-            <select class="equalForm" id="itemInput" name='item'>
+            <select required class="equalForm" id="itemInput" name='item'>
                 <option disabled selected>Your Item</option>
                 {% for item in items %}
                 {% if item[1] == 0 %}

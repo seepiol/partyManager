@@ -73,6 +73,10 @@ def makeorder():
 
     return render_template('success.html', name=person, code=code)
 
+@app.route("/dash")
+def dash():
+    return render_template("dashboard.html", total_orders=dboperations.get_total_order(), favourite_item=dboperations.get_favourite_item(), active_users=dboperations.get_active_users(), available_items=dboperations.get_available_item())
+
 # ERROR PAGES
 
 @app.route("/404")
