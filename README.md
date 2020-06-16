@@ -22,7 +22,6 @@ WebApp for ordering beverages and other stuff written in flask
     ├── index.html
     ├── layout.html
     ├── license.html
-    ├── mindex.html
     ├── policy.html
     └── success.html
 ```

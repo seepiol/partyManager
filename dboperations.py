@@ -85,7 +85,7 @@ def display_items():
     return result
 
 def display_items_id():
-    c.execute("SELECT id, name FROM items")
+    c.execute("SELECT * FROM items")
     result = c.fetchall()
     return result
 
@@ -98,9 +98,11 @@ def makeOutOfStock(id):
     conn.commit()
 
 def item_exists(item):
+    print(item)
     c.execute("SELECT outOfStock FROM items WHERE name=?", (item,))
     r = c.fetchone()
-    if r == 0:
-        return True
-    else:
+    print(r)
+    if r == None:
         return False
+    else:
+        return True
