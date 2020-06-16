@@ -21,26 +21,26 @@
 import sqlite3
 import random
 import string
+import time
 
 dbname = "party.db"
 
 conn = sqlite3.connect(dbname, check_same_thread=False)
+c = conn.cursor()
 
+def getOrder(i):
+    c.execute("SELECT item, person FROM orders WHERE id=?", (i,))
+    r = c.fetchone()
+    return r
 
-i = 1
-
-while True:
-    try:
-        c = conn.cursor()
-        c.execute("SELECT item, person FROM orders WHERE id=?", (i,))
-        r = c.fetchall()
-        print(len(r), r)
-        if len(r) == 0:
-            print("no other orders...")
-            pass
-        else:
-            i+=1
-        c.close()
+if __name__ == "__main__":
+    i=1
+    while True:
         input()
-    except:
-        pass
+        r = getOrder(i)
+        if r:
+            print(f"{i}) {r[0]} ==> {r[1]}")
+            i+=1
+        else:
+            print("No new orders")
+            

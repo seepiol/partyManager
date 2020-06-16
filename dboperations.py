@@ -84,6 +84,23 @@ def display_items():
     result = c.fetchall()
     return result
 
+def display_items_id():
+    c.execute("SELECT id, name FROM items")
+    result = c.fetchall()
+    return result
+
 def save_order(item, person):
     c.execute("INSERT INTO orders VALUES (NULL, ?, ?)", (item, person))
     conn.commit()
+
+def makeOutOfStock(id):
+    c.execute("UPDATE items SET outOfStock = 1 WHERE id = ?", (id,))
+    conn.commit()
+
+def item_exists(item):
+    c.execute("SELECT outOfStock FROM items WHERE name=?", (item,))
+    r = c.fetchone()
+    if r == 0:
+        return True
+    else:
+        return False

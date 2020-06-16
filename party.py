@@ -35,7 +35,13 @@ def index():
 
 @app.route("/policy")
 def policy():
-    return render_template("policy.html")
+    arg_code = request.args.get("code")
+    return render_template("policy.html", code=arg_code)
+
+@app.route("/license")
+def license():
+    arg_code = request.args.get("code")
+    return render_template("license.html", code=arg_code)
 
 # Making Order
 @app.route("/makeorder", methods=["POST"])
@@ -53,11 +59,15 @@ def makeorder():
 
     if not code and not arg_code:
         return render_template("goback.html", message="Please insert your code")
-    
-    
+           
+
     person = dboperations.find_person(code)
     if person == False:
         return render_template("goback.html", message="Unvalid code")
+
+    if not dboperations.item_exists(item):
+        return render_template("goback.html", message="Unvalid item")
+
     dboperations.save_order(item, person)
     print(f"{person}->{item}")
 
