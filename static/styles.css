@@ -1,4 +1,6 @@
 .headerBox {
+  left: 0;
+  top: 0;
   height: 20%;
   width: auto;
   padding: 2%;
@@ -22,6 +24,7 @@
 
 .siteTitle {
   color: white;
+  text-decoration: none;
 }
 
 * {
@@ -48,4 +51,24 @@ p{
 }
 .equalForm {
   width: 100%;
+}
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color:beige;
+  color: black;
+  text-align: center;
+  text-decoration: none;
+}
+
+a {
+  color: black;
+  text-decoration: none;
+}
+
+.goBack {
+  text-decoration: underline;
 }

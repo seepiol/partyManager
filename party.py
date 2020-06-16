@@ -63,6 +63,35 @@ def makeorder():
 
     return render_template('success.html', name=person, code=code)
 
+# ERROR PAGES
+
+@app.route("/404")
+@app.errorhandler(404)
+def not_found():
+    arg_code = request.args.get("code")
+    return render_template('error.html', code=arg_code, error_code="404", error_message="We're sorry, the page you're searching doesn't exists")
+
+@app.route("/405")
+@app.errorhandler(405)
+def method_not_allowed():
+    arg_code = request.args.get("code")
+    return render_template('error.html', code=arg_code, error_code="405", error_message="We're sorry, the requested method isn't allowed")
+
+@app.route("/500")
+@app.errorhandler(500)
+def internal_server_error():
+    print("ERROR 500, WARNING")
+    arg_code = request.args.get("code")
+    return render_template('error.html', code=arg_code, error_code="500", error_message="We're sorry, the server has encountered a unknown situation. The developer has been warned")
+
+@app.route("/503")
+@app.errorhandler(503)
+def service_unavailable():
+    print("ERROR 503, WARNING")
+    arg_code = request.args.get("code")
+    return render_template('error.html', code=arg_code, error_code="503", error_message="We're sorry, the service is unavailable. Please wait a moment and try again. The developer has been warned")
+
+
 # MAIN
 if __name__ == '__main__':
     dboperations.make_tables()

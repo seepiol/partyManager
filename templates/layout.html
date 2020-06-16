@@ -10,16 +10,18 @@
     <body>
         <header>
             <div class="headerBox" style="background-image: url('static/img/header.jpg');">
-                <h1 class="siteTitle">PartyName</h1>
+                <h1 class="siteTitle"><a class="siteTitle" href="/">PartyName</a></h1>
                 <h2 class="siteTitle">{% block header %}{% endblock %}</h2>
             </div>
         </header>
             {% block body %}
             {% endblock %}
         <footer>
-            <p><a href="/">Home</a> - <a href="https://github.com/seepiol/partymanager">Source Code</a> - <a href="/policy">Privacy Policy</a> - <a href="https://github.com/seepiol/partymanager/blob/master/LICENSE">License</a></p>
+            <div class=footer>
+            <p><a href="/">Home</a> - <a target="_blank" href="https://github.com/seepiol/partymanager">Source Code</a> - <a href="/policy">Privacy Policy</a> - <a target="_blank" href="https://github.com/seepiol/partymanager/blob/master/LICENSE">License</a></p>
             {% block footer %}
             {% endblock %}
+        </div>
         </footer>
     </body>
 </html>

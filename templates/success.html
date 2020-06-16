@@ -1,10 +1,15 @@
 {% extends "layout.html" %}
+{% block title %}Order Confirmed{% endblock %}
+{% block header %}Order Confirmed{% endblock %}
 {% block body %}
 <h1>Order Confirmed</h1>
-<h2>Thank you! your item is arriving!</h2>
+<h2>Thank you! Your item is arriving!</h2>
+<center>
+<br>
 {% if code %}
-<a href="/?code={{code}}">home</a>
+<p><a class="goBack" href="/?code={{code}}">Go Home</a></p>
 {% else %}
-<a href="/">home</a>
+<a href="/" class="goBack">home</a>
 {% endif %}
+</center>
 {% endblock %}
