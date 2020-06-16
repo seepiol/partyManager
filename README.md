@@ -1,6 +1,7 @@
 # PartyManager
 WebApp for ordering beverages and other stuff written in flask
 
+![Screenshot_Home - PartyName](https://user-images.githubusercontent.com/60071372/84798182-f11b3b80-affa-11ea-9924-ccc4389c0f9d.png)
 ## Repository Structure
 ```
 .
