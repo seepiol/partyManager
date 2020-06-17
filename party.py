@@ -135,4 +135,4 @@ def service_unavailable():
 if __name__ == '__main__':
     dboperations.make_tables()
     app.debug = True
-    app.run(host = '0.0.0.0', port=8081)
+    app.run(host = '0.0.0.0', port=8080)
