@@ -117,7 +117,10 @@ def get_total_order():
 
 def get_favourite_item():
     c.execute("SELECT item, COUNT(item) as n FROM orders GROUP BY item ORDER BY n DESC LIMIT 1")
-    return c.fetchall()[0][0]
+    try:
+        return c.fetchall()[0][0]
+    except IndexError:
+        return None
 
 
 def get_available_item():

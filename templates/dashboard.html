@@ -3,9 +3,10 @@
 <html>
     <head>
         <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-        <meta http-equiv="refresh" content="{{time}}" >        
+        <meta http-equiv="refresh" content="{{time}}" >    
+        <title>PM Dashboard</title>    
     </head>
-    <body>
+    <body style="background-color: grey;">
         <div id=megaContainer>
             <div id=container1>
                 <div class="totalOrders">
@@ -31,8 +32,17 @@
                     <h3>Available Items</h3>
                 </div>
             </div>
-        </div>
-        <p>Update every {{time}} second</p>
+        <div id=containerInfo>
+            <div class="info">
+        <p>Total visits: {{visits}} - Errors: {{errors}}</p>
+    </div>
+    </div>
+    <div id=containerInfo2>
+        <div class="info2">
+    <p>Update rate: {{time}}s - Uptime: {{uptime}}m</p>
+</div>
+</div>
+    </div>
     </body>
 </html>
 {% endblock %}
