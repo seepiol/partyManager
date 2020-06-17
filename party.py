@@ -75,7 +75,7 @@ def makeorder():
 
 @app.route("/dash")
 def dash():
-    return render_template("dashboard.html", total_orders=dboperations.get_total_order(), favourite_item=dboperations.get_favourite_item(), active_users=dboperations.get_active_users(), available_items=dboperations.get_available_item())
+    return render_template("dashboard.html", total_orders=dboperations.get_total_order(), favourite_item=dboperations.get_favourite_item(), active_users=dboperations.get_active_users(), available_items=dboperations.get_available_item(), time=5)
 
 # ERROR PAGES
 

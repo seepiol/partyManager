@@ -36,7 +36,7 @@ def make_tables():
                     (id integer primary key autoincrement, code text, name text, surname text)""")
         
         c.execute("""CREATE TABLE items
-                    (id integer primary key autoincrement, name text, outOfStock integer)""")
+                    (id integer primary key autoincrement, name text, orders integer, outOfStock integer)""")
 
         c.execute("""CREATE TABLE orders
                     (id integer primary key autoincrement, item text, person text)""")
@@ -68,7 +68,7 @@ def populate_people():
 def populate_items():
     item_name = input("Insert the item name (RETURN to end): ")
     while item_name != "":
-        c.execute("INSERT INTO items VALUES (NULL,?,0)", (item_name,))
+        c.execute("INSERT INTO items VALUES (NULL,?,0,0)", (item_name,))
         item_name = input("Insert the item name (RETURN to end): ")
     conn.commit()
 
@@ -92,14 +92,15 @@ def display_items_id():
 
 def save_order(item, person):
     c.execute("INSERT INTO orders VALUES (NULL, ?, ?)", (item, person))
+    c.execute("UPDATE items SET orders = orders + 1 WHERE name=?", (item,))
     conn.commit()
+    
 
 def makeOutOfStock(id):
     c.execute("UPDATE items SET outOfStock = 1 WHERE id = ?", (id,))
     conn.commit()
 
 def item_exists(item):
-    print(item)
     c.execute("SELECT outOfStock FROM items WHERE name=?", (item,))
     r = c.fetchone()
     print(r)
@@ -108,14 +109,24 @@ def item_exists(item):
     else:
         return True
 
+# Dashboard Methods
+
 def get_total_order():
-    return 25
+    c.execute("SELECT * FROM orders")
+    return len(c.fetchall())
 
 def get_favourite_item():
-    return "Coca Cola"
+    c.execute("SELECT item, COUNT(item) as n FROM orders GROUP BY item ORDER BY n DESC LIMIT 1")
+    return c.fetchall()[0][0]
+
 
 def get_available_item():
-    return 19
+    c.execute("SELECT * FROM items WHERE outOfStock = 0")
+    av = len(c.fetchall())
+    c.execute("SELECT * FROM items")
+    tot = len(c.fetchall())
+    return f"{av}/{tot}"
 
 def get_active_users():
-    return 16
+    c.execute("SELECT DISTINCT person FROM orders")
+    return len(c.fetchall())

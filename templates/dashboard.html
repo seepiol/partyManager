@@ -3,6 +3,7 @@
 <html>
     <head>
         <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+        <meta http-equiv="refresh" content="{{time}}" >        
     </head>
     <body>
         <div id=megaContainer>
@@ -31,6 +32,7 @@
                 </div>
             </div>
         </div>
+        <p>Update every {{time}} second</p>
     </body>
 </html>
 {% endblock %}
