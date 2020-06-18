@@ -38,62 +38,26 @@ def index():
     global visits
     visits+=1
     arg_code = request.args.get("code")
-    return render_template("index.html", items = dboperations.display_items(), code=arg_code)
+    return render_template("admin.html", items = dboperations.display_items_id(), code=arg_code)
 
-@app.route("/policy")
-def policy():
-    global visits
-    visits+=1
-    arg_code = request.args.get("code")
-    return render_template("policy.html", code=arg_code)
+@app.route("/addperson", methods=["POST"])
+def add_person():
+    person_name = request.form.get("personName")
+    dboperations.add_person(person_name)
+    return redirect("/")
 
-@app.route("/license")
-def license():
-    global visits
-    visits+=1
-    arg_code = request.args.get("code")
-    return render_template("license.html", code=arg_code)
+@app.route("/additem", methods=["POST"])
+def add_item():
+    item_name = request.form.get("itemName")
+    dboperations.add_item(item_name)
+    return redirect("/")
 
-# Making Order
-@app.route("/makeorder", methods=["POST"])
-def makeorder():
-    global visits
-    visits+=1
-    # Getting the values
-    code = request.form.get("code")
-    item = request.form.get("item")
-    arg_code = request.args.get("code")
+@app.route("/outofstock", methods=["POST"])
+def out_of_stock():
+    id = request.form.get("itemName")
+    dboperations.make_out_of_stock(id)
+    return redirect("/")
 
-    if not code and arg_code != "":
-        code = arg_code
-
-    if not item:
-        return render_template("goback.html", message="Please select an item", code=code)
-
-    if not code and not arg_code:
-        return render_template("goback.html", message="Please insert your code")
-    
-    code=code.lower()
-
-    person = dboperations.find_person(code)
-    if person == False:
-        return render_template("goback.html", message="Unvalid code")
-
-    if not dboperations.item_exists(item):
-        return render_template("goback.html", message="Unvalid item", code=code)
-
-    dboperations.save_order(item, person)
-
-    return render_template('success.html', name=person, code=code)
-
-@app.route("/dash")
-def dash():
-    global visits
-    global errors
-    global start_time
-    timedelta = ((datetime.datetime.now()-start_time).seconds)
-    uptime = round(timedelta/60, 0)
-    return render_template("dashboard.html", total_orders=dboperations.get_total_order(), favourite_item=dboperations.get_favourite_item(), active_users=dboperations.get_active_users(), available_items=dboperations.get_available_item(), time=5, visits=visits, errors=errors, uptime=int(uptime))
 
 # ERROR PAGES
 
@@ -136,4 +100,4 @@ def service_unavailable(a):
 if __name__ == '__main__':
     dboperations.make_tables()
     app.debug = True
-    app.run(host = '0.0.0.0', port=8080)
+    app.run(host = '127.0.0.1', port=5000)

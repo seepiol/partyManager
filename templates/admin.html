@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+{% block title %}Admin{% endblock %}
+{% block header %}Admin{% endblock %}
+{% block body %}
+<h1>Admin</h1>
+<center>
+<form action='/addperson' method='post'>
+        <label for="personName"><p>Add Person</p></label>
+        <input type="text" id="personName" name="personName">
+        <input type='submit' value='Add Person'>      
+</form>
+<form action="/additem" method="post">
+        <label for="itemName"><p>Add Item</p></label>
+        <input type="text" id="itemName" name="itemName">
+        <input type="submit" value="Add Item">
+</form>
+<form action="/outofstock" method="post">
+    <label for="itemName"><p>Mark item as Out of Stock</p></label>
+    <select required id="itemName" name='itemName'>
+        <option disabled selected>Your Item</option>
+        {% for item in items %}
+        {% if item[3] == 0 %}
+        <option value='{{item[0]}}'>{{item[1]}}</option>
+        {% else %}
+        <option disabled value='{{item[0]}}'>{{item[1]}}</option>
+        {% endif %}
+        {% endfor %}
+    </select>
+    <input type="submit" value="Mark as OOS">
+</form>
+</center>
+{% endblock %}

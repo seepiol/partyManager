@@ -95,7 +95,7 @@ def save_order(item, person):
     conn.commit()
     
 
-def makeOutOfStock(id):
+def make_out_of_stock(id):
     c.execute("UPDATE items SET outOfStock = 1 WHERE id = ?", (id,))
     conn.commit()
 
@@ -108,6 +108,16 @@ def item_exists(item):
     else:
         return True
 
+def add_person(complete_name):
+    name = complete_name.split(" ")[0]
+    surname = complete_name.split(" ")[1:]
+    surname = " ".join(surname)
+    c.execute("INSERT INTO people VALUES (NULL,?,?,?)", (generate_code(4), name, surname))
+    conn.commit()
+
+def add_item(item_name):
+    c.execute("INSERT INTO items VALUES (NULL, ?, 0, 0)", (item_name,))
+    conn.commit()
 # Dashboard Methods
 
 def get_total_order():
