@@ -82,7 +82,6 @@ def find_person(code):
 def display_items():
     c.execute("SELECT name, outOfStock FROM items")
     result = c.fetchall()
-    print(result)
     return result
 
 def display_items_id():

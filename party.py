@@ -72,7 +72,8 @@ def makeorder():
 
     if not code and not arg_code:
         return render_template("goback.html", message="Please insert your code")
-           
+    
+    code=code.lower()
 
     person = dboperations.find_person(code)
     if person == False:
@@ -98,11 +99,11 @@ def dash():
 
 @app.route("/404")
 @app.errorhandler(404)
-def not_found():
+def not_found(a):
     global errors
     errors+=1
     arg_code = request.args.get("code")
-    return render_template('error.html', code=arg_code, error_code="404", error_message="We're sorry, the page you're searching doesn't exists")
+    return render_template('error.html', code=arg_code, error_code="404", error_message="We're sorry, the page you're searching doesn't exists"), 404
 
 @app.route("/405")
 @app.errorhandler(405)
@@ -110,7 +111,7 @@ def method_not_allowed():
     global errors
     errors+=1
     arg_code = request.args.get("code")
-    return render_template('error.html', code=arg_code, error_code="405", error_message="We're sorry, the requested method isn't allowed")
+    return render_template('error.html', code=arg_code, error_code="405", error_message="We're sorry, the requested method isn't allowed"), 405
 
 @app.route("/500")
 @app.errorhandler(500)
@@ -119,7 +120,7 @@ def internal_server_error():
     errors+=1
     print("ERROR 500, WARNING")
     arg_code = request.args.get("code")
-    return render_template('error.html', code=arg_code, error_code="500", error_message="We're sorry, the server has encountered a unknown situation. The developer has been warned")
+    return render_template('error.html', code=arg_code, error_code="500", error_message="We're sorry, the server has encountered a unknown situation. The developer has been warned"), 500
 
 @app.route("/503")
 @app.errorhandler(503)
@@ -128,7 +129,7 @@ def service_unavailable():
     errors+=1
     print("ERROR 503, WARNING")
     arg_code = request.args.get("code")
-    return render_template('error.html', code=arg_code, error_code="503", error_message="We're sorry, the service is unavailable. Please wait a moment and try again. The developer has been warned")
+    return render_template('error.html', code=arg_code, error_code="503", error_message="We're sorry, the service is unavailable. Please wait a moment and try again. The developer has been warned"), 503
 
 
 # MAIN
