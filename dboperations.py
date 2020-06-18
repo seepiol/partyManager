@@ -55,23 +55,6 @@ def generate_code(length):
     codes.append(code)
     return code
 
-def populate_people():
-    complete_name = input("Insert name and surname (RETURN to end): ")
-    while complete_name != "":
-        name = complete_name.split(" ")[0]
-        surname = complete_name.split(" ")[1:]
-        surname = " ".join(surname)
-        c.execute("INSERT INTO people VALUES (NULL,?,?,?)", (generate_code(4), name, surname))
-        complete_name = input("Insert name and surname (RETURN to end): ")
-    conn.commit()
-
-def populate_items():
-    item_name = input("Insert the item name (RETURN to end): ")
-    while item_name != "":
-        c.execute("INSERT INTO items VALUES (NULL,?,0,0)", (item_name,))
-        item_name = input("Insert the item name (RETURN to end): ")
-    conn.commit()
-
 def find_person(code):
     c.execute("SELECT name, surname FROM people WHERE code=?", (code,))
     result = c.fetchall()
@@ -94,7 +77,6 @@ def save_order(item, person):
     c.execute("UPDATE items SET orders = orders + 1 WHERE name=?", (item,))
     conn.commit()
     
-
 def make_out_of_stock(id):
     c.execute("UPDATE items SET outOfStock = 1 WHERE id = ?", (id,))
     conn.commit()
@@ -118,6 +100,11 @@ def add_person(complete_name):
 def add_item(item_name):
     c.execute("INSERT INTO items VALUES (NULL, ?, 0, 0)", (item_name,))
     conn.commit()
+
+def print_people():
+    c.execute("SELECT code, name, surname FROM people")
+    return c.fetchall()
+
 # Dashboard Methods
 
 def get_total_order():

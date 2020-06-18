@@ -58,6 +58,9 @@ def out_of_stock():
     dboperations.make_out_of_stock(id)
     return redirect("/")
 
+@app.route("/codes")
+def codes():
+    return render_template("codes.html", codes=dboperations.print_people())
 
 # ERROR PAGES
 

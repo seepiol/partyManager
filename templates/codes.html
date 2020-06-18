@@ -1,0 +1,16 @@
+{% block body %}
+<table>
+    <tr>
+        <th><h1>Name</h1></th>
+        <th><h1>Code</h1></th>
+    </tr>
+
+{% for person in codes %}
+    <tr>
+        <th><h2>{{person[1]}} {{person[2]}}</h2></th>
+        <th><h2>{{person[0]}}</h2></th>
+    </tr>
+{% endfor %}
+</table>
+<a href="/">Go Home</a>
+{% endblock %}
