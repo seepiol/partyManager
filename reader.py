@@ -18,29 +18,17 @@
 
 """
 
-import sqlite3
 import random
-import string
-import time
-
-dbname = "party.db"
-
-conn = sqlite3.connect(dbname, check_same_thread=False)
-c = conn.cursor()
-
-def getOrder(i):
-    c.execute("SELECT item, person FROM orders WHERE id=?", (i,))
-    r = c.fetchone()
-    return r
+import dboperations
 
 if __name__ == "__main__":
     i=1
     while True:
-        input()
-        r = getOrder(i)
+        r = dboperations.get_order(i)
         if r:
             print(f"{i}) {r[0]} ==> {r[1]}")
             i+=1
         else:
             print("No new orders")
+        input()
             

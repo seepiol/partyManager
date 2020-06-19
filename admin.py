@@ -25,6 +25,7 @@ import sqlite3
 import dboperations
 import csv
 import datetime
+import time
 
 app=Flask(__name__)
 
@@ -38,7 +39,11 @@ def index():
     global visits
     visits+=1
     arg_code = request.args.get("code")
-    return render_template("admin.html", items = dboperations.display_items_id(), code=arg_code)
+    try:
+        return render_template("admin.html", items = dboperations.display_items_id(), code=arg_code)
+    except sqlite3.ProgrammingError:
+        return render_template("admin.html", items = dboperations.display_items_id(), code=arg_code)
+
 
 @app.route("/addperson", methods=["POST"])
 def add_person():

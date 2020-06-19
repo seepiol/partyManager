@@ -30,6 +30,14 @@ c = conn.cursor()
 codes = []
 
 def make_tables():
+    """
+    Creates the tables in the sqlite3 database
+    
+    Table 'people': id, code, name, surname
+    Table 'items': id, name, orders, outOfStock
+    Table 'orders': id, item, person
+
+    """
     print("Initializing DB")
     try:
         c.execute("""CREATE TABLE people
@@ -48,6 +56,17 @@ def make_tables():
         print(f"The database \"{dbname}\" already exists.")
 
 def generate_code(length):
+    """
+    Creates a random code of n alphabetical characters.
+    Checks that it is not already present in 'codes' list
+
+    Args:
+        lenght (int): number of the characters
+    
+    Returns:
+        code (str): the n characters code
+
+    """
     letters = string.ascii_lowercase
     code = ''.join(random.choice(letters) for i in range(length))
     while code in codes:
@@ -56,32 +75,89 @@ def generate_code(length):
     return code
 
 def find_person(code):
+    """
+    Search for a match between a code provided as argument and a person in the database
+
+    Args:
+        code (str): the 4 characters code 
+    
+    Returns:
+        complete_name (str): complete name of the person corresponding to the code
+    
+    If there isn't a match: 
+    Returns False
+
+    """
     c.execute("SELECT name, surname FROM people WHERE code=?", (code,))
     result = c.fetchall()
     if len(result) == 0:
         return False
-    return " ".join(result[0])
+    complete_name = " ".join(result[0])
+    return complete_name
 
 def display_items():
+    """
+    Displays the items in the database
+    
+    Returns:
+        result (list): a list containing the item name and its status (if it's out of stock or not)
+
+    """
     c.execute("SELECT name, outOfStock FROM items")
     result = c.fetchall()
     return result
 
 def display_items_id():
+    """
+    Displays the items in the database
+    
+    Returns:
+        result (list): a list containing the id, the item name and its status (if it's out of stock or not)
+
+    """
     c.execute("SELECT * FROM items")
     result = c.fetchall()
     return result
 
+# TODO:replace person with code
 def save_order(item, person):
+    """
+    Save the order in the database
+
+    Args:
+        item (str): the name of the item
+        person (str): the name of the person
+
+    """
     c.execute("INSERT INTO orders VALUES (NULL, ?, ?)", (item, person))
     c.execute("UPDATE items SET orders = orders + 1 WHERE name=?", (item,))
     conn.commit()
     
 def make_out_of_stock(id):
+    """
+    makes an item out of stock
+
+    Args:
+        id (int): the id of the item
+
+    """
     c.execute("UPDATE items SET outOfStock = 1 WHERE id = ?", (id,))
     conn.commit()
 
 def item_exists(item):
+    """
+    check if an item exists
+
+    Args:
+        item (str): the name of the item
+
+    Returns:
+        if exists:
+            True (bool)
+        if doesn't exists:
+            False (bool)
+
+    """
     c.execute("SELECT outOfStock FROM items WHERE name=?", (item,))
     r = c.fetchone()
     print(r)
@@ -91,6 +167,13 @@ def item_exists(item):
         return True
 
 def add_person(complete_name):
+    """
+    add a person in the db with the unique 4 chars code
+
+    Args:
+        complete_name (str): the name and surname of the person
+
+    """
     name = complete_name.split(" ")[0]
     surname = complete_name.split(" ")[1:]
     surname = " ".join(surname)
@@ -98,12 +181,42 @@ def add_person(complete_name):
     conn.commit()
 
 def add_item(item_name):
+    """
+    Add an item in the db
+
+    Args:
+        item_name (str): the name of the item
+
+    """
     c.execute("INSERT INTO items VALUES (NULL, ?, 0, 0)", (item_name,))
     conn.commit()
 
+
 def print_people():
+    """
+    Select all the people 
+
+    Returns:
+        c.fetchall() (list): the result of the SQL query
+
+    """
     c.execute("SELECT code, name, surname FROM people")
     return c.fetchall()
+
+
+def get_order(i):
+        """
+    Select a precise order
+
+    Args:
+        i (int): the id of the order
+    
+    Results:
+        c.fetchone() (list): the result of the SQL query
+
+    """
+    c.execute("SELECT item, person FROM orders WHERE id=?", (i,))
+    return c.fetchone()
 
 # Dashboard Methods
 
