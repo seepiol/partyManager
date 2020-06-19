@@ -20,7 +20,7 @@
 {% block header %}Admin{% endblock %}
 {% block body %}
 <h1>Admin</h1>
-<center>
+<div class="center">
 <form action='/addperson' method='post'>
         <label for="personName"><p>Add Person</p></label>
         <input type="text" id="personName" name="personName">
@@ -47,5 +47,5 @@
 </form>
 
 <p><a href="/codes" style="text-decoration: underline">Codes</a></p>
-</center>
+</div>
 {% endblock %}

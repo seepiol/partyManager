@@ -22,9 +22,9 @@
 {% block header %}Home{% endblock %}
 
 {% block body %}
+<div class="center">
     <div class="formBox">
     <form action='/makeorder' method='post'>
-        <center></center>
             <label for="nameInput"><p>Your code</p></label>
             {% if code %}
             <input required class="equalForm" type="text" id="codeInput" name="code" value={{code}}>
@@ -32,8 +32,6 @@
             <input required class="equalForm" type="text" id="codeInput" name="code">
             {% endif %}
             <label for="itemInput"><p>Item</p></label>
-        </center>
-            <center>
             <select required class="equalForm" id="itemInput" name='item'>
                 <option disabled selected>Your Item</option>
                 {% for item in items %}
@@ -44,12 +42,11 @@
                 {% endif %}
                 {% endfor %}
             </select>
-        </center>
         <br>
         <br>
         <center>
         <input class="btn btn-outline-secondary" type='submit' value='Make Order'>      
-        </center>
+        </div>
     </form>
 </div>
 {% endblock %}

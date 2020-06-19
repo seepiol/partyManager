@@ -21,12 +21,12 @@
 {% block body %}
 <h1>Error {{error_code}}</h1>
 <h2>{{error_message}}</h2>
-<center>
+<div class="center">
     <br>
     {% if code %}
     <p><a class="goBack" href="/?code={{code}}">Go Home</a></p>
     {% else %}
     <a href="/" class="goBack">home</a>
     {% endif %}
-    </center>
+</div>
 {% endblock %}
