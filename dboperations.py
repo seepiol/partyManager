@@ -205,7 +205,7 @@ def print_people():
 
 
 def get_order(i):
-        """
+    """
     Select a precise order
 
     Args:
