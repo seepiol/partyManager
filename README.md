@@ -5,29 +5,35 @@ WebApp for ordering beverages and other stuff written in flask
 ## Repository Structure
 ```
 .
-├── dboperations.py   # module for database operations
-├── .gitignore
+├── admin.py            # ADMIN Flask App
+├── dboperations.py     # DB operation module
 ├── LICENSE
-├── admin.py          # second flask application for admin stuff
-├── party.db          # the database
-├── party.py          # the flask application
-├── reader.py         # python script to display orders
+├── party.db            # Database for people, items and orders
+├── party.py            # Main Flask App
+├── reader.py           # Python reader 
 ├── README.md
-├── static            # webpage static elements
-│   ├── favicon.ico   # favicon
-│   ├── img           # webpage images
-│   └── styles.css    # webpage css style
-└── templates         # webpage html pages
+├── static
+│   ├── Cantarell-Bold.ttf
+│   ├── favicon.ico
+│   ├── img
+│   │   ├── header.jpg
+│   │   └── ok.png
+│   ├── Roboto-Bold.ttf
+│   ├── Roboto-Regular.ttf
+│   ├── Roboto-Thin.ttf
+│   └── styles.css
+└── templates
+    ├── admin.html
+    ├── codes.html
+    ├── dashboard.html
     ├── error.html
     ├── goback.html
     ├── index.html
     ├── layout.html
     ├── license.html
     ├── policy.html
-    ├── admin.html
-    ├── codes.html
-    ├── dashboard.html
     └── success.html
+
 ```
 ## Running Flow
 
