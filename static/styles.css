@@ -1,7 +1,25 @@
 @font-face{
   font-family: roboto;
   src: url('Roboto-Regular.ttf');
-  font-weight: 800;
+  font-weight: regular;
+}
+
+@font-face{
+  font-family: roboto;
+  src: url('Roboto-Bold.ttf');
+  font-weight: bold;
+}
+
+@font-face{
+  font-family: roboto;
+  src: url('Roboto-Thin.ttf');
+  font-weight: 300;
+}
+
+@font-face{
+  font-family: cantarell;
+  src: url('Cantarell-Bold.ttf');
+  font-weight: 700;
 }
 
 .headerBox {
@@ -35,11 +53,12 @@
 .siteTitle {
   color: white;
   text-decoration: none;
+  font-weight: 700;
+  font-family: cantarell;
 }
 
 * {
-  font-family: roboto, sans-serif;
-  font-weight: 800;
+  font-family: roboto;
 }
 
 h1 {
