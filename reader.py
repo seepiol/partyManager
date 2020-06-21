@@ -20,15 +20,26 @@
 
 import random
 import dboperations
+import os
 
 if __name__ == "__main__":
+    os.system("clear")
+    print("PARTYMANAGER READER\nPress [RETURN] for refresh the view\n")
     i=1
+    c=0
     while True:
+        if c % 3 == 0:
+            os.system("clear")
+            print("PARTYMANAGER READER\n")
         r = dboperations.get_order(i)
         if r:
             print(f"{i}) {r[0]} ==> {r[1]}")
             i+=1
         else:
             print("No new orders")
-        input()
-            
+        c+=1
+        try:
+            input()
+        except KeyboardInterrupt:
+            print("Quitting")
+            exit()
