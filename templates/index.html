@@ -27,9 +27,9 @@
     <form action='/makeorder' method='post'>
             <label for="nameInput"><p>Your code</p></label>
             {% if code %}
-            <input required class="equalForm" type="text" id="codeInput" name="code" value={{code}}>
+            <input required class="textForm" type="text" id="codeInput" name="code" value={{code}}>
             {% else %}    
-            <input required class="equalForm" type="text" id="codeInput" name="code">
+            <input required class="textForm" type="text" id="codeInput" name="code">
             {% endif %}
             <label for="itemInput"><p>Item</p></label>
             <select required class="equalForm" id="itemInput" name='item'>
