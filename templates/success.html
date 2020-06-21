@@ -22,13 +22,12 @@
 <h1>Order Confirmed</h1>
 <div class="center">
 <img src="{{ url_for('static', filename='img/ok.png') }}" width=200 height=229>
-</center>
 <h2>Thank you! Your item is arriving!</h2>
-<center>
+<br>  
 {% if code %}
-<p><a class="goBack" href="/?code={{code}}">Go Home</a></p>
+<p><a class="button4" style="background-color:#6eacc5" href="/?code={{code}}">Go Home</a></p>
 {% else %}
-<a href="/" class="goBack">Go Home</a>
+<a class="button4" style="background-color:#6eacc5" href="/" class="goBack">Go Home</a>
 {% endif %}
 </div>
 {% endblock %}
