@@ -38,7 +38,10 @@ def index():
     global visits
     visits+=1
     arg_code = request.args.get("code")
-    return render_template("index.html", items = dboperations.display_items(), code=arg_code)
+    try:
+        return render_template("index.html", items = dboperations.display_items(), code=arg_code)
+    except sqlite3.ProgrammingError:
+        return render_template("goback.html", message="Something went wrong", code=arg_code)
 
 @app.route("/policy")
 def policy():
@@ -84,7 +87,10 @@ def makeorder():
 
     dboperations.save_order(item, person)
 
-    return render_template('success.html', name=person, code=code)
+    try:
+        return render_template('success.html', name=person, code=code)
+    except sqlite3.ProgrammingError:
+        return render_template("goback.html", message="Something went wrong", code=arg_code)
 
 @app.route("/dash")
 def dash():
@@ -93,8 +99,10 @@ def dash():
     global start_time
     timedelta = ((datetime.datetime.now()-start_time).seconds)
     uptime = round(timedelta/60, 0)
-    return render_template("dashboard.html", total_orders=dboperations.get_total_order(), favourite_item=dboperations.get_favourite_item(), active_users=dboperations.get_active_users(), available_items=dboperations.get_available_item(), time=5, visits=visits, errors=errors, uptime=int(uptime))
-
+    try:
+        return render_template("dashboard.html", total_orders=dboperations.get_total_order(), favourite_item=dboperations.get_favourite_item(), active_users=dboperations.get_active_users(), available_items=dboperations.get_available_item(), time=5, visits=visits, errors=errors, uptime=int(uptime))
+    except sqlite3.ProgrammingError:
+        return render_template("goback.html", message="Something went wrong")
 # ERROR PAGES
 
 @app.route("/404")
