@@ -92,7 +92,7 @@ p{
   left: 0;
   bottom: 0;
   width: 100%;
-  background-color: #d9cabf;
+  background-color: #F2F2F2;
   color: black;
   text-align: center;
   text-decoration: none;
@@ -208,8 +208,8 @@ a {
   box-sizing: border-box;
   text-decoration:none;
   font-family:'Roboto',sans-serif;
-  font-weight:300;
-  color:#FFFFFF;
+  font-weight: regular;
+  color:white;
   text-shadow: 0 0.04em 0.04em rgba(0,0,0,0.35);
   text-align:center;
   transition: all 0.2s;
