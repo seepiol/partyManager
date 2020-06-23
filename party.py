@@ -25,6 +25,7 @@ import sqlite3
 import dboperations
 import csv
 import datetime
+import invidious
 
 app=Flask(__name__)
 
@@ -56,6 +57,12 @@ def license():
     visits+=1
     arg_code = request.args.get("code")
     return render_template("license.html", code=arg_code)
+
+@app.route("/music", methods=["GET"])
+def music():
+    search_query = request.args.get("title")
+    invidious.play(invidious.search(search_query)[0])
+    return "ok"
 
 # Making Order
 @app.route("/makeorder", methods=["POST"])
