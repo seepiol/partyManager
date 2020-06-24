@@ -83,7 +83,7 @@ def makeorder():
         return render_template("goback.html", message="Unvalid code")
 
     if not dboperations.item_exists(item):
-        return render_template("goback.html", message="Unvalid item", code=code)
+        return render_template("goback.html", message="Unvalid or unavailable item", code=code)
 
     dboperations.save_order(item, person)
 

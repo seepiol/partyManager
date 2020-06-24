@@ -158,9 +158,8 @@ def item_exists(item):
             False (bool)
 
     """
-    c.execute("SELECT outOfStock FROM items WHERE name=?", (item,))
+    c.execute("SELECT outOfStock FROM items WHERE name=? AND outOfStock=0", (item,))
     r = c.fetchone()
-    print(r)
     if r == None:
         return False
     else:
