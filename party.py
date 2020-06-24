@@ -25,7 +25,6 @@ import sqlite3
 import dboperations
 import csv
 import datetime
-import invidious
 
 app=Flask(__name__)
 
