@@ -129,9 +129,12 @@ def save_order(item, person):
         person (str): the name of the person
 
     """
-    c.execute("INSERT INTO orders VALUES (NULL, ?, ?)", (item, person))
-    c.execute("UPDATE items SET orders = orders + 1 WHERE name=?", (item,))
-    conn.commit()
+    if item_exists(item):
+        c.execute("INSERT INTO orders VALUES (NULL, ?, ?)", (item, person))
+        c.execute("UPDATE items SET orders = orders + 1 WHERE name=?", (item,))
+        conn.commit()
+    else:
+        return 0
     
 def make_out_of_stock(id):
     """
