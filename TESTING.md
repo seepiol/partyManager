@@ -26,5 +26,3 @@ PARTYMANAGER TESTING CHECKLIST
 | 10          |         |               | X                 |         | X             |                   |          |
 | 11          |         |               | X                 |         |               | X                 |          |
 | 12          |         |               | X                 |         |               |                   | X        |
-
-| Test Number | Expected 

@@ -51,3 +51,6 @@ WebApp for ordering beverages and other stuff written in flask
 ### 4) Reader.py: Read the orders
 
 `python reader.py`
+
+## Testing
+See [TESTING](https://github.com/seepiol/partymanager/blob/master/TESTING.md) for see the testing procedure
