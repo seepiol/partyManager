@@ -21,6 +21,7 @@
 # Libs
 from flask import Flask, render_template, request, redirect, url_for
 import os
+import sqlite3
 import dboperations
 import datetime
 
@@ -76,17 +77,16 @@ def makeorder():
     
     code=code.lower()
 
-    person = dboperations.find_person(code)
-    if person == False:
+    if dboperations.check_code(code) == False:
         return render_template("goback.html", message="Unvalid code")
 
-    if not dboperations.item_exists(item):
+    if dboperations.check_item(item) == False:
         return render_template("goback.html", message="Unvalid or unavailable item", code=code)
 
-    dboperations.save_order(item, person)
+    dboperations.save_order(item, code)
 
     try:
-        return render_template('success.html', name=person, code=code)
+        return render_template('success.html', code=code)
     except sqlite3.ProgrammingError:
         return render_template("goback.html", message="Something went wrong", code=arg_code)
 

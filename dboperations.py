@@ -74,6 +74,14 @@ def generate_code(length):
     codes.append(code)
     return code
 
+def check_code(code):
+    c.execute("SELECT * FROM people WHERE code=?", (code,))
+    result = c.fetchall()
+    if len(result) == 0:
+        return False
+    else:
+        return True
+
 def find_person(code):
     """
     Search for a match between a code provided as argument and a person in the database
@@ -90,8 +98,6 @@ def find_person(code):
     """
     c.execute("SELECT name, surname FROM people WHERE code=?", (code,))
     result = c.fetchall()
-    if len(result) == 0:
-        return False
     complete_name = " ".join(result[0])
     return complete_name
 
@@ -107,18 +113,17 @@ def display_items():
     result = c.fetchall()
     return result
 
-# TODO:replace person with code
-def save_order(item, person):
+def save_order(item, code):
     """
     Save the order in the database
 
     Args:
         item (str): the name of the item
-        person (str): the name of the person
+        code (str): the code of the person
 
     """
-    if item_exists(item):
-        c.execute("INSERT INTO orders VALUES (NULL, ?, ?)", (item, person))
+    if check_code(code) and check_item(item):
+        c.execute("INSERT INTO orders VALUES (NULL, ?, ?)", (item, find_person(code)))
         c.execute("UPDATE items SET orders = orders + 1 WHERE name=?", (item,))
         conn.commit()
     else:
@@ -135,7 +140,7 @@ def make_out_of_stock(id):
     c.execute("UPDATE items SET outOfStock = 1 WHERE id = ?", (id,))
     conn.commit()
 
-def item_exists(item):
+def check_item(item):
     """
     check if an item exists
 
@@ -149,9 +154,9 @@ def item_exists(item):
             False (bool)
 
     """
-    c.execute("SELECT outOfStock FROM items WHERE name=? AND outOfStock=0", (item,))
-    r = c.fetchone()
-    if r == None:
+    c.execute("SELECT * FROM items WHERE name=? AND outOfStock=0", (item,))
+    r = c.fetchall()
+    if len(r) == 0:
         return False
     else:
         return True
