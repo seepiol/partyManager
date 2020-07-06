@@ -100,18 +100,6 @@ def display_items():
     Displays the items in the database
     
     Returns:
-        result (list): a list containing the item name and its status (if it's out of stock or not)
-
-    """
-    c.execute("SELECT name, outOfStock FROM items")
-    result = c.fetchall()
-    return result
-
-def display_items_id():
-    """
-    Displays the items in the database
-    
-    Returns:
         result (list): a list containing the id, the item name and its status (if it's out of stock or not)
 
     """

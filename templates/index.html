@@ -35,10 +35,10 @@
             <select required class="equalForm" id="itemInput" name='item'>
                 <option disabled selected>Your Item</option>
                 {% for item in items %}
-                {% if item[1] == 0 %}
-                <option value='{{item[0]}}'>{{item[0]}}</option>
+                {% if item[2] == 0 %}
+                <option value='{{item[1]}}'>{{item[1]}}</option>
                 {% else %}
-                <option disabled value='{{item[0]}}'>{{item[0]}}</option>
+                <option disabled value='{{item[1]}}'>{{item[1]}}</option>
                 {% endif %}
                 {% endfor %}
             </select>
