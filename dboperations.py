@@ -55,24 +55,26 @@ def make_tables():
     except sqlite3.OperationalError:
         print(f"The database \"{dbname}\" already exists.")
 
-def generate_code(length):
+def check_item(item):
     """
-    Creates a random code of n alphabetical characters.
-    Checks that it is not already present in 'codes' list
+    check if an item exists
 
     Args:
-        lenght (int): number of the characters
-    
+        item (str): the name of the item
+
     Returns:
-        code (str): the n characters code
+        if exists:
+            True (bool)
+        if doesn't exists:
+            False (bool)
 
     """
-    letters = string.ascii_lowercase
-    code = ''.join(random.choice(letters) for i in range(length))
-    while code in codes:
-        code = ''.join(random.choice(letters) for i in range(length))
-    codes.append(code)
-    return code
+    c.execute("SELECT * FROM items WHERE name=? AND outOfStock=0", (item,))
+    r = c.fetchall()
+    if len(r) == 0:
+        return False
+    else:
+        return True
 
 def check_code(code):
     c.execute("SELECT * FROM people WHERE code=?", (code,))
@@ -113,6 +115,25 @@ def display_items():
     result = c.fetchall()
     return result
 
+def generate_code(length):
+    """
+    Creates a random code of n alphabetical characters.
+    Checks that it is not already present in 'codes' list
+
+    Args:
+        lenght (int): number of the characters
+    
+    Returns:
+        code (str): the n characters code
+
+    """
+    letters = string.ascii_lowercase
+    code = ''.join(random.choice(letters) for i in range(length))
+    while code in codes:
+        code = ''.join(random.choice(letters) for i in range(length))
+    codes.append(code)
+    return code
+
 def save_order(item, code):
     """
     Save the order in the database
@@ -139,27 +160,6 @@ def make_out_of_stock(id):
     """
     c.execute("UPDATE items SET outOfStock = 1 WHERE id = ?", (id,))
     conn.commit()
-
-def check_item(item):
-    """
-    check if an item exists
-
-    Args:
-        item (str): the name of the item
-
-    Returns:
-        if exists:
-            True (bool)
-        if doesn't exists:
-            False (bool)
-
-    """
-    c.execute("SELECT * FROM items WHERE name=? AND outOfStock=0", (item,))
-    r = c.fetchall()
-    if len(r) == 0:
-        return False
-    else:
-        return True
 
 def add_person(complete_name):
     """

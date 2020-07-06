@@ -1,8 +1,11 @@
 # PartyManager
+
 WebApp for ordering beverages and other stuff written in flask
 
 ![Screenshot_Home - PartyName](https://user-images.githubusercontent.com/60071372/84798182-f11b3b80-affa-11ea-9924-ccc4389c0f9d.png)
+
 ## Repository Structure
+
 ```
 .
 ├── admin.py            # ADMIN Flask App
@@ -33,13 +36,18 @@ WebApp for ordering beverages and other stuff written in flask
     ├── license.html
     ├── policy.html
     └── success.html
-
 ```
+
 ## Running Flow
 
 ### 1) Admin.py: The admin dashboard. Add items and people. marks items outofstock
+
 `python admin.py`
+
 ### 3) Party.py: Provides the web interface and saves the orders in the db
+
 `python party.py`
+
 ### 4) Reader.py: Read the orders
+
 `python reader.py`
