@@ -2,7 +2,11 @@
 
 WebApp for ordering beverages and other stuff written in flask
 
-![Screenshot_Home - PartyName](https://user-images.githubusercontent.com/60071372/84798182-f11b3b80-affa-11ea-9924-ccc4389c0f9d.png)
+![Home - PartyName](https://user-images.githubusercontent.com/60071372/86636989-3a94f000-bfd5-11ea-9868-51cdf0ebbe9e.png)
+
+<br>
+
+![Order Confirmed - PartyName](https://user-images.githubusercontent.com/60071372/86637001-3c5eb380-bfd5-11ea-9629-99d938429db6.png)
 
 ## Repository Structure
 
