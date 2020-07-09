@@ -23,13 +23,19 @@ import dboperations
 import os
 
 if __name__ == "__main__":
-    os.system("clear")
+
+    if os.name == "nt":
+        clean="cls"
+    else:
+        clean="clear"
+
+    os.system(clean)
     print("PARTYMANAGER READER\nPress [RETURN] for refresh the view\n")
     i=1
     c=0
     while True:
         if c % 3 == 0:
-            os.system("clear")
+            os.system(clean)
             print("PARTYMANAGER READER\n")
         r = dboperations.get_order(i)
         if r:
