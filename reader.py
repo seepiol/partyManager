@@ -18,34 +18,40 @@
 
 """
 
-import random
+from tkinter import *
 import dboperations
-import os
+
+class Window(Frame):
+
+    def __init__(self, master=None):
+        Frame.__init__(self, master)        
+        self.master = master
+        self.pack(fill=BOTH, expand=1)
+
+        self.next_order_button = Button(self, text="Mark As Done", command=self.refresh)
+        self.next_order_button.place(x=10,y=150)
+
+        self.order_label = Label(self, text="Click 'Mark as Done' to see the first order")
+        self.order_label.place(x=10,y=20)
+
+    def refresh(self):
+        global order_id
+        r = dboperations.get_order(order_id)
+        if r:
+            self.order_label.configure(text=f"Order number {order_id}\n{r[0].title()} by {r[1].title()}")
+            order_id+=1
+        else:
+            self.order_label.configure(text="No New orders")
 
 if __name__ == "__main__":
+    # initialize tkinter
+    order_id = 1
+    root = Tk()
+    root.geometry("200x200")
+    app = Window(root)
 
-    if os.name == "nt":
-        clean="cls"
-    else:
-        clean="clear"
+    # set window title
+    root.wm_title("PartyManager Reader")
 
-    os.system(clean)
-    print("PARTYMANAGER READER\nPress [RETURN] for refresh the view\n")
-    i=1
-    c=0
-    while True:
-        if c % 3 == 0:
-            os.system(clean)
-            print("PARTYMANAGER READER\n")
-        r = dboperations.get_order(i)
-        if r:
-            print(f"{i}) {r[0]} ==> {r[1]}")
-            i+=1
-        else:
-            print("No new orders")
-        c+=1
-        try:
-            input()
-        except KeyboardInterrupt:
-            print("Quitting")
-            exit()
+    # show window
+    root.mainloop()
