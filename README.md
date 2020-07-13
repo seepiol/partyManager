@@ -15,6 +15,7 @@ WebApp for ordering beverages and other stuff written in flask
 ├── admin.py            # ADMIN Flask App
 ├── dboperations.py     # DB operation module
 ├── LICENSE
+├── fileloader.py       # Populate the db from a csv file
 ├── party.db            # Database for people, items and orders
 ├── party.py            # Main Flask App
 ├── reader.py           # Python reader 
@@ -47,6 +48,10 @@ WebApp for ordering beverages and other stuff written in flask
 ### 1) Admin.py: The admin dashboard. Add items and people. marks items outofstock
 
 `python admin.py`
+
+### 2) Fileloader.py: load the information (people or items) contained in a csv file into the database
+
+`python fileloader.py`
 
 ### 3) Party.py: Provides the web interface and saves the orders in the db
 
