@@ -22,6 +22,7 @@ from tkinter import Tk
 from tkinter.filedialog import askopenfilename
 import csv
 import dboperations
+import argparse
 
 def load_people(people_list):
     for person in people_list:
@@ -41,16 +42,44 @@ def load_items(items_list):
 
 
 if __name__ == "__main__":
-    Tk().withdraw()
+
+    parser = argparse.ArgumentParser(description="Rasp2Pc PC Component")
+    parser.add_argument(
+        "-f","--filename",
+        type=str,
+        default="",
+        help="the .csv filename",
+    )
+
+    parser.add_argument(
+        "-t","--type",
+        type=str,
+        help="The information contained in the csv file ('people' or 'items')",
+    )
+
+    args = parser.parse_args()
+
     print("PartyManager FileLoader")
     print("Program to load the information (people or items) contained in a csv file into the database")
 
-    table = input("What information does the csv contain?\n1) People List\n2) Item List\n> ")
-    while table not in ("1", "2"):
+    if not args.type:
         table = input("What information does the csv contain?\n1) People List\n2) Item List\n> ")
+        while table not in ("1", "2"):
+            table = input("What information does the csv contain?\n1) People List\n2) Item List\n> ")
+    else:
+        table=args.type
 
-    input("Please press return and select the csv file. Please make sure that the file extention is .csv\n > ")
-    filename = askopenfilename(title="Select CSV file", filetypes=(("csv files","*.csv"),("all files","*.*")) )
+        if table in ("p","people","1"):
+            table="1"
+        elif table in ("i","item","items","2"):
+            table="2"
+
+    if not args.filename:
+        Tk().withdraw()
+        input("Please press return and select the csv file. Please make sure that the file extention is .csv\n > ")
+        filename = askopenfilename(title="Select CSV file", filetypes=(("csv files","*.csv"),("all files","*.*")) )
+    else:
+        filename=args.filename
 
     info_list = []
 
