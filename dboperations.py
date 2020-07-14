@@ -172,8 +172,11 @@ def add_person(complete_name):
     name = complete_name.split(" ")[0]
     surname = complete_name.split(" ")[1:]
     surname = " ".join(surname)
-    c.execute("INSERT INTO people VALUES (NULL,?,?,?)", (generate_code(4), name, surname))
-    conn.commit()
+    try:
+        c.execute("INSERT INTO people VALUES (NULL,?,?,?)", (generate_code(4), name, surname))
+        conn.commit()
+    except sqlite3.OperationalError:
+        make_tables()
 
 def add_item(item_name):
     """
