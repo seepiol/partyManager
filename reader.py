@@ -28,20 +28,30 @@ class Window(Frame):
         self.master = master
         self.pack(fill=BOTH, expand=1)
 
-        self.next_order_button = Button(self, text="Mark As Done", command=self.refresh)
+        self.next_order_button = Button(self, text="Next Order", command=self.refresh)
         self.next_order_button.place(x=10,y=150)
 
-        self.order_label = Label(self, text="Click 'Mark as Done' to see the first order")
-        self.order_label.place(x=10,y=20)
+        self.number_label = Label(self, text="Click 'Mark as Done' to see the first order")
+        self.number_label.place(x=10,y=20)
+
+        self.item_label =  Label(self, text="")
+        self.item_label.place(x=10,y=40)
+
+        self.person_label =  Label(self, text="")
+        self.person_label.place(x=10,y=60)
 
     def refresh(self):
         global order_id
         r = dboperations.get_order(order_id)
         if r:
-            self.order_label.configure(text=f"Order number {order_id}\n{r[0].title()} by {r[1].title()}")
+            self.number_label.configure(text=f"Order Number: {order_id}")
+            self.item_label.configure(text=f"Item: {r[0].title()}")
+            self.person_label.configure(text=f"To: {r[1].title()}") 
             order_id+=1
         else:
-            self.order_label.configure(text="No New orders")
+            self.number_label.configure(text=f"No New Order")
+            self.item_label.configure(text=f"Wait a moment")
+            self.person_label.configure(text=f"and click 'next order'") 
 
 if __name__ == "__main__":
     # initialize tkinter
