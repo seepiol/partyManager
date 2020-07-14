@@ -37,11 +37,13 @@ def load_items(items_list):
         if item[0] == "X":
             print(f"- ignored {item}")
         else:
-            dboperations.add_item(item)
+            dboperations.add_item(str(item))
             print(f"- added {item}")
 
 
 if __name__ == "__main__":
+
+    Tk().withdraw()
 
     parser = argparse.ArgumentParser(description="Rasp2Pc PC Component")
     parser.add_argument(
@@ -75,7 +77,7 @@ if __name__ == "__main__":
             table="2"
 
     if not args.filename:
-        Tk().withdraw()
+        
         input("Please press return and select the csv file. Please make sure that the file extention is .csv\n > ")
         filename = askopenfilename(title="Select CSV file", filetypes=(("csv files","*.csv"),("all files","*.*")) )
     else:
@@ -92,4 +94,4 @@ if __name__ == "__main__":
         load_people(info_list[0])
     
     elif table == "2":
-        load_items(info_list)
+        load_items(info_list[0])
