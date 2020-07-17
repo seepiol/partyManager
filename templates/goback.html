@@ -22,9 +22,11 @@
 <h1>Error</h1>
 <h2>{{message}}</h2>
 <br>
+<center>
 {% if code %}
-<p><a class="button4" style="background-color:#3C6CE4" href="/?code={{code}}">Go Home</a></p>
+<p><a class="button4" style="background-color:#3C6CE4" href="/?code={{code}}">Home</a></p>
 {% else %}
-<a class="button4" style="background-color:#3C6CE4" href="/" class="goBack">Go Home</a>
+<a class="button4" style="background-color:#3C6CE4" href="/" class="goBack">Home</a>
+</center>
 {% endif %}
 {% endblock %}

@@ -40,7 +40,7 @@ def index():
     try:
         return render_template("index.html", items = dboperations.display_items(), code=arg_code)
     except sqlite3.ProgrammingError:
-        return render_template("goback.html", message="Something went wrong", code=arg_code)
+        return render_template("goback.html", message="Qualcosa è andato storto", code=arg_code)
 
 @app.route("/policy")
 def policy():
@@ -70,25 +70,25 @@ def makeorder():
         code = arg_code
 
     if not item:
-        return render_template("goback.html", message="Please select an item", code=code)
+        return render_template("goback.html", message="Per favore seleziona un elemento", code=code)
 
     if not code and not arg_code:
-        return render_template("goback.html", message="Please insert your code")
+        return render_template("goback.html", message="Per favore inserisci il tuo codice")
     
     code=code.lower()
 
     if dboperations.check_code(code) == False:
-        return render_template("goback.html", message="Unvalid code")
+        return render_template("goback.html", message="Codice non valido")
 
     if dboperations.check_item(item) == False:
-        return render_template("goback.html", message="Unvalid or unavailable item", code=code)
+        return render_template("goback.html", message="Prodotto non valido o non disponibile", code=code)
 
     dboperations.save_order(item, code)
 
     try:
         return render_template('success.html', code=code)
     except sqlite3.ProgrammingError:
-        return render_template("goback.html", message="Something went wrong", code=arg_code)
+        return render_template("goback.html", message="Qualcosa è andato storto", code=arg_code)
 
 @app.route("/dash")
 def dash():
@@ -100,42 +100,39 @@ def dash():
     try:
         return render_template("dashboard.html", total_orders=dboperations.get_total_order(), favourite_item=dboperations.get_favourite_item(), active_users=dboperations.get_active_users(), available_items=dboperations.get_available_item(), time=5, visits=visits, errors=errors, uptime=int(uptime))
     except sqlite3.ProgrammingError:
-        return render_template("goback.html", message="Something went wrong")
+        return render_template("goback.html", message="Qualcosa è andato storto")
+
 # ERROR PAGES
 
-@app.route("/404")
 @app.errorhandler(404)
 def not_found(a):
     global errors
     errors+=1
     arg_code = request.args.get("code")
-    return render_template('error.html', code=arg_code, error_code="404", error_message="We're sorry, the page you're searching doesn't exists"), 404
+    return render_template('error.html', code=arg_code, error_code="404", error_message="Spiacente, la pagina richiesta non è disponibile"), 404
 
-@app.route("/405")
 @app.errorhandler(405)
 def method_not_allowed(a):
     global errors
     errors+=1
     arg_code = request.args.get("code")
-    return render_template('error.html', code=arg_code, error_code="405", error_message="We're sorry, the requested method isn't allowed"), 405
+    return render_template('error.html', code=arg_code, error_code="405", error_message="Spiacente, il metodo richiesto non è permesso"), 405
 
-@app.route("/500")
 @app.errorhandler(500)
 def internal_server_error(a):
     global errors
     errors+=1
     print("ERROR 500, WARNING")
     arg_code = request.args.get("code")
-    return render_template('error.html', code=arg_code, error_code="500", error_message="We're sorry, the server has encountered a unknown situation. The developer has been warned"), 500
+    return render_template('error.html', code=arg_code, error_code="500", error_message="Spiacente, il server ha riscontrato un errore interno. Il responsabile è stato avvisato"), 500
 
-@app.route("/503")
 @app.errorhandler(503)
 def service_unavailable(a):
     global errors
     errors+=1
     print("ERROR 503, WARNING")
     arg_code = request.args.get("code")
-    return render_template('error.html', code=arg_code, error_code="503", error_message="We're sorry, the service is unavailable. Please wait a moment and try again. The developer has been warned"), 503
+    return render_template('error.html', code=arg_code, error_code="503", error_message="Spiacente, il servizio non è disponibile. Riprova più tardi. Il responsabile è stato avvisato"), 503
 
 
 # MAIN

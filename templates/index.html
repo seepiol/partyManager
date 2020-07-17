@@ -31,9 +31,9 @@
             {% else %}    
             <input required class="textForm" type="text" id="codeInput" name="code">
             {% endif %}
-            <label for="itemInput"><p>Item</p></label>
+            <label for="itemInput"><p>Prodotto</p></label>
             <select required class="equalForm" id="itemInput" name='item'>
-                <option disabled selected>Your Item</option>
+                <option disabled selected>Seleziona Prodotto</option>
                 {% for item in items %}
                 {% if item[3] == 0 %}
                 <option value='{{item[1]}}'>{{item[1]}}</option>
@@ -47,7 +47,7 @@
         <br>
         <div class="center">
             
-        <input class="button4" style="background-color:#3C6CE4" type='submit' value='Make Order'>      
+        <input class="button4" style="background-color:#3C6CE4" type='submit' value='Invia Ordine'>      
         </div>
     </form>
 </div>

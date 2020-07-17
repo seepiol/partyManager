@@ -16,18 +16,18 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 -->
 {% extends "layout.html" %}
-{% block title %}Order Confirmed{% endblock %}
-{% block header %}Order Confirmed{% endblock %}
+{% block title %}Ordine Confermato{% endblock %}
+{% block header %}Ordine Confermato{% endblock %}
 {% block body %}
-<h1>Order Confirmed</h1>
+<h1>Ordine Confermato</h1>
 <div class="center">
 <img src="{{ url_for('static', filename='img/ok.png') }}" width=200 height=229>
-<h2>Thank you! Your item is arriving!</h2>
+<h2>Grazie! Il tuo ordine sta per essere consegnato!</h2>
 <br>  
 {% if code %}
-<p><a class="button4" style="background-color:#3C6CE4" href="/?code={{code}}">Go Home</a></p>
+<p><a class="button4" style="background-color:#3C6CE4" href="/?code={{code}}">Home</a></p>
 {% else %}
-<a class="button4" style="background-color:#3C6CE4" href="/" class="goBack">Go Home</a>
+<a class="button4" style="background-color:#3C6CE4" href="/" class="goBack">Home</a>
 {% endif %}
 </div>
 {% endblock %}
