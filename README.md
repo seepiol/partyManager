@@ -1,5 +1,8 @@
 # PartyManager
 
+WARNING: THIS REPOSITORY HAS BEEN MOVED TO [GITLAB](https://gitlab.com/seepiol/Rasp2Pc). ALL THE CODE IN THIS REPOSITORY IS DEPRECATED
+
+
 WebApp for ordering beverages and other stuff written in flask
 
 ![Home - PartyName](https://user-images.githubusercontent.com/60071372/86636989-3a94f000-bfd5-11ea-9868-51cdf0ebbe9e.png)
